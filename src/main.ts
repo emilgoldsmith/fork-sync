@@ -4,7 +4,6 @@ const { Octokit } = require("@octokit/rest");
 const { retry } = require("@octokit/plugin-retry");
 const token = core.getInput('token', { required: true });
 const context = Github.context;
-console.log(retry);
 const MyOctokit = Octokit.plugin(retry);
 
 async function run() {
