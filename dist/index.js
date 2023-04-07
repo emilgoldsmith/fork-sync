@@ -88,7 +88,6 @@ function run() {
             }
         }
         catch (error) {
-            console.log(JSON.stringify(error, null, 4));
             if ((_d = (_c = error === null || error === void 0 ? void 0 : error.request) === null || _c === void 0 ? void 0 : _c.request) === null || _d === void 0 ? void 0 : _d.retryCount) {
                 console.log(`request failed after ${error.request.request.retryCount} retries with a delay of ${error.request.request.retryAfter}`);
             }
