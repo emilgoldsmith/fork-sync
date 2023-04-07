@@ -13,8 +13,8 @@ jobs:
       - uses: actions/checkout@v3.3.0
 
       - uses: ./
-          with:
-            base: master
-            head: master
-            auto_merge: false
-            retries: 0
+        with:
+          base: master
+          head: master
+          auto_merge: false
+          retries: 0
