@@ -4,9 +4,9 @@ on:
     branches: master
 
 jobs:
-  check_pr:
+  ci:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3.3.0
 
-      - uses: .
+      - uses: ./
