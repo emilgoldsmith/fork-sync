@@ -3,7 +3,7 @@
   "version": "1.8.0",
   "private": true,
   "description": "Keep your fork up to date",
-  "main": "lib/main.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "npm install && tsc && ncc build lib/main.js --license licenses.txt",
     "test": "echo \"Error: no test specified\" && exit 0"
