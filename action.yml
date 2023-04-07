@@ -1,6 +1,5 @@
 name: "Fork Sync"
 description: "Keep your fork up to date"
-main: dist/index.js
 author: "tgymnich"
 branding:
   icon: "git-branch"
@@ -58,4 +57,4 @@ inputs:
 
 runs:
   using: "node16"
-  main: "lib/main.js"
+  main: "dist/index.js"
