@@ -19,7 +19,7 @@ async function run() {
   const autoMerge = core.getBooleanInput('auto_merge', { required: false });
   const retries = parseInt(core.getInput('retries', { required: false })) || 4;
   const retryAfter = parseInt(core.getInput('retry_after', { required: false })) || 60;
-  
+
   const octokit = new MyOctokit({
     auth: token,
     request: {
@@ -49,6 +49,7 @@ async function run() {
         await octokit.pulls.merge({ owner: context.repo.owner, repo: context.repo.repo, pull_number: pr.data.number, merge_method: mergeMethod });
     }
   } catch (error: any) {
+    console.log(JSON.stringify(error, null, 4))
     if (error.request.request.retryCount) {
       console.log(
         `request failed after ${error.request.request.retryCount} retries with a delay of ${error.request.request.retryAfter}`
