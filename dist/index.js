@@ -47,7 +47,7 @@ const token = core.getInput('token', { required: true });
 const context = Github.context;
 const MyOctokit = Octokit.plugin(retry);
 function run() {
-    var _a, _b, _c, _d, _e, _f, _g, _h;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
     return __awaiter(this, void 0, void 0, function* () {
         let owner = core.getInput('owner', { required: false }) || context.repo.owner;
         let repo = core.getInput('repo', { required: false }) || context.repo.repo;
@@ -59,8 +59,8 @@ function run() {
         const ignoreFail = core.getBooleanInput('ignore_fail', { required: false });
         const autoApprove = core.getBooleanInput('auto_approve', { required: false });
         const autoMerge = core.getBooleanInput('auto_merge', { required: false });
-        const retries = parseInt(core.getInput('retries', { required: false })) || 4;
-        const retryAfter = parseInt(core.getInput('retry_after', { required: false })) || 60;
+        const retries = (_a = parseInt(core.getInput('retries', { required: false }))) !== null && _a !== void 0 ? _a : 4;
+        const retryAfter = (_b = parseInt(core.getInput('retry_after', { required: false }))) !== null && _b !== void 0 ? _b : 60;
         const octokit = new MyOctokit({
             auth: token,
             request: {
@@ -89,10 +89,10 @@ function run() {
         }
         catch (error) {
             console.log(JSON.stringify(error, null, 4));
-            if ((_b = (_a = error === null || error === void 0 ? void 0 : error.request) === null || _a === void 0 ? void 0 : _a.request) === null || _b === void 0 ? void 0 : _b.retryCount) {
+            if ((_d = (_c = error === null || error === void 0 ? void 0 : error.request) === null || _c === void 0 ? void 0 : _c.request) === null || _d === void 0 ? void 0 : _d.retryCount) {
                 console.log(`request failed after ${error.request.request.retryCount} retries with a delay of ${error.request.request.retryAfter}`);
             }
-            if ((_h = (_g = (_f = ((_c = error === null || error === void 0 ? void 0 : error.errors) !== null && _c !== void 0 ? _c : (_e = (_d = error === null || error === void 0 ? void 0 : error.response) === null || _d === void 0 ? void 0 : _d.data) === null || _e === void 0 ? void 0 : _e.errors)) === null || _f === void 0 ? void 0 : _f[0]) === null || _g === void 0 ? void 0 : _g.message) === null || _h === void 0 ? void 0 : _h.startsWith('No commits between')) {
+            if ((_k = (_j = (_h = ((_e = error === null || error === void 0 ? void 0 : error.errors) !== null && _e !== void 0 ? _e : (_g = (_f = error === null || error === void 0 ? void 0 : error.response) === null || _f === void 0 ? void 0 : _f.data) === null || _g === void 0 ? void 0 : _g.errors)) === null || _h === void 0 ? void 0 : _h[0]) === null || _j === void 0 ? void 0 : _j.message) === null || _k === void 0 ? void 0 : _k.startsWith('No commits between')) {
                 console.log('No commits between ' + context.repo.owner + ':' + base + ' and ' + owner + ':' + head);
             }
             else if (!!error.errors && !!error.errors[0] && !!error.errors[0].message && error.errors[0].message.startsWith('A pull request already exists for')) {
